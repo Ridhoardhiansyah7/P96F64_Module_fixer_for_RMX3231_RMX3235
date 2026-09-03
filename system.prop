@@ -1,0 +1,57 @@
+# =======================================================
+# FIX BLUETOOTH PAIRING & PROFILE CONNECTION
+# =======================================================
+bluetooth.profile.a2dp.source.enabled=true
+bluetooth.profile.avrcp.target.enabled=true
+bluetooth.profile.gatt.enabled=true
+bluetooth.profile.hfp.ag.enabled=true
+bluetooth.profile.hid.device.enabled=true
+bluetooth.profile.hid.host.enabled=true
+bluetooth.profile.map.server.enabled=true
+bluetooth.profile.opp.enabled=true
+bluetooth.profile.pan.nap.enabled=true
+bluetooth.profile.pan.panu.enabled=true
+bluetooth.profile.pbap.server.enabled=true
+bluetooth.profile.bas.client.enabled=true
+
+# =======================================================
+# FIX AUDIO ROUTING - FORCE SOFTWARE ENCODING
+# =======================================================
+#  fixed audio coming out through speaker when tws is active
+persist.bluetooth.a2dp_offload.disabled=true
+ro.bluetooth.a2dp_offload.supported=false
+persist.vendor.bt.a2dp_offload_cap=none
+
+# =======================================================
+# FIX BLUETOOTH AV-SYNC
+# =======================================================
+# Forces real-time resynchronization between audio and video
+persist.sys.media.avsync=true
+# Limits audio sink capping so that Stagefright does not over-compensate delay.
+media.stagefright.audio.sink.cap=0
+# Media Player adjustment for software audio synchronization
+persist.vendor.audio.latency.presentation=0
+
+# =======================================================
+# FIX BLUETOOTH DISCONNECTED WHEN NO MEDIA IS PLAYING
+# =======================================================
+# Extended AudioFlinger's idle time to 10 minutes (600000 ms) so that the stream is not immediately destroyed when the music is paused.
+ro.audio.flinger_standbytime_ms=600000
+# Forces the framework to tolerate delay reports during resynchronization.
+persist.bluetooth.a2dp.delay_report=true
+# Turn off aggressive power saving/sniff mode feature
+persist.vendor.bt.sniff_enable=false
+persist.vendor.bt.power_save=false
+# Force Audio Policy to always listen for the active status of Bluetooth devices
+persist.vendor.audio.bt_sco.status=keep
+
+# =======================================================
+# FIX AUDIO GAIN
+# =======================================================
+ro.audio.ignore_effects=true
+audio.offload.disable=true
+ro.audio.policy.vol.bypass=true
+ro.config.media_vol_default=5
+ro.config.media_vol_steps=75
+ro.config.vc_call_vol_steps=15
+

@@ -1,0 +1,7 @@
+id=Narzo_50I
+name=C11.2021.Narzo.50I.P963F64.port.rom.issue.fixer
+version=v1
+versionCode=1
+author=Aflahal
+description=Fixed Brightness,ril,audio gain,etc in P963F64(ZTE A54) port rom
+updateJson=https://raw.githubusercontent.com/Ridhoardhiansyah7/P96F64_Module_fixer_for_RMX3231_RMX3235/master/update.json

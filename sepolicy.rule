@@ -1,0 +1,207 @@
+# --- 1. UNISOC RADIO HARDWARE & CORE DAEMON ---
+allow radio default_android_service service_manager find
+allow radio default_android_service service_manager add
+allow radio default_android_hwservice hwservice_manager find
+
+# --- 2. RILD & NVITEMD (IMEI / SIM Path) ---
+allow rild block_device blk_file read
+allow rild block_device blk_file open
+allow rild sblock_device blk_file read
+allow rild sblock_device blk_file open
+allow rild radio_device chr_file read
+allow rild radio_device chr_file open
+
+allow vendor_rild block_device blk_file read
+allow vendor_rild block_device blk_file open
+allow vendor_rild sblock_device blk_file read
+allow vendor_rild sblock_device blk_file open
+allow vendor_rild radio_device chr_file read
+allow vendor_rild radio_device chr_file open
+allow vendor_rild vendor_radio_prop property_service set
+
+allow nvitemd block_device blk_file read
+allow nvitemd block_device blk_file open
+allow nvitemd nvitemd_device chr_file read
+allow nvitemd nvitemd_device chr_file open
+
+allow vendor_nvitemd block_device blk_file read
+allow vendor_nvitemd block_device blk_file open
+
+# --- 3. MODEM CONTROL & BOOT CTRL ---
+allow hal_bootctrl_default gsi_metadata_file dir search
+allow vendor_init default_prop property_service set
+
+allow modem_control sblock_device blk_file read
+allow modem_control sblock_device blk_file write
+allow modem_control sblock_device blk_file open
+allow modem_control sblock_device blk_file ioctl
+allow modem_control modem_control_device chr_file read
+allow modem_control modem_control_device chr_file write
+allow modem_control modem_control_device chr_file open
+allow modem_control modem_control_device chr_file ioctl
+
+allow vendor_modem_control sblock_device blk_file read
+allow vendor_modem_control sblock_device blk_file write
+allow vendor_modem_control sblock_device blk_file open
+allow vendor_modem_control sblock_device blk_file ioctl
+
+# --- 4. FIX NETWORK CONTROL  ---
+allow sprd_networkcontrol servicemanager binder call
+allow sprd_networkcontrol servicemanager binder transfer
+allow sprd_networkcontrol default_android_service service_manager find
+
+
+# --- 5. FIX TETHERING / HOTSPOT BPF ---
+allow radio prod_file dir search
+allow network_stack fs_bpf file read
+allow network_stack fs_bpf file write
+allow network_stack fs_bpf file open
+allow flags_health_check default_prop property_service set
+allow flags_health_check device_config_tethering_prop file open
+allow flags_health_check device_config_tethering_prop file read
+allow init device_config_tethering_prop property_service set
+
+# --- 6. FIX SRMI, RADIOAPP  ---
+allow sprd_radio_app:c512 game_service service_manager find
+allow sprd_radio_app:c768 game_service service_manager find
+allow sprd_radio_app:c512 netstats_service service_manager find
+allow sprd_radio_app:c768 netstats_service service_manager find
+allow sprd_radio_app:c512 content_capture_service service_manager find
+allow sprd_radio_app:c768 content_capture_service service_manager find
+
+allow system_app hal_srmi_hwservice hwservice_manager find
+allow system_app hal_srmi_default binder call
+allow system_app vendor_sysfs_srmi file read
+allow system_app vendor_sysfs_srmi file write
+allow system_app vendor_sysfs_srmi file open
+allow system_app vendor_sysfs_srmi file getattr
+
+allow system_app srmi_service service_manager add
+allow system_app srmi_service service_manager find
+allow srmi_proxyd vendor_radio_prop file read
+allow srmi_proxyd vendor_radio_prop file open
+allow srmi_proxyd vendor_radio_prop file getattr
+allow srmi_proxyd vendor_radio_prop file map
+
+allow srmi_proxyd srmi_proxyd capability dac_override
+allow srmi_proxyd srmi_proxyd capability dac_read_search
+
+allow srmi_proxyd spipe_device chr_file read
+allow srmi_proxyd spipe_device chr_file open
+allow srmi_proxyd spipe_device chr_file write
+allow srmi_proxyd spipe_device chr_file ioctl
+
+# --- 7. SYSTEMSERVER_SYSTEMAPP,PLATFORMAPP, GMS --- 
+allow system_server default_android_service service_manager add
+allow system_server default_android_hwservice hwservice_manager find
+allow system_server default_prop property_service set
+allow system_server default_android_service service_manager find
+allow system_server VendorLocationManager_Service service_manager add
+allow system_app default_prop property_service set
+allow system_app default_android_service service_manager find
+allow system_app unlabeled dir getattr
+allow system_app unlabeled dir search
+allow system_app unlabeled file getattr
+allow system_app unlabeled file open
+allow system_app unlabeled file read
+
+allow gmscore_app traced_producer_socket sock_file write
+allow gmscore_app traced unix_stream_socket connectto
+allow gmscore_app:c512 default_android_service service_manager find
+allow gmscore_app:c768 default_android_service service_manager find
+
+allow platform_app:c512 ssense_service service_manager find
+allow platform_app:c768 ssense_service service_manager find
+allow platform_app:c512 default_android_service service_manager find
+allow platform_app:c768 default_android_service service_manager find
+allow platform_app:c512 smartlink_service service_manager find
+allow platform_app:c768 smartlink_service service_manager find
+allow platform_app:c512 audio_ex_service service_manager find
+allow platform_app:c768 audio_ex_service service_manager find
+
+allow priv_app:c512 default_android_service service_manager find
+allow priv_app:c768 default_android_service service_manager find
+
+allow isolated_app:c512 content_capture_service service_manager find
+allow isolated_app:c768 content_capture_service service_manager find
+
+allow audioserver default_prop property_service set
+allow mediaserver ssense_service service_manager find
+allow mediaprovider_app:c166 ssense_service service_manager find
+allow mediaprovider_app:c256 ssense_service service_manager find
+allow mediaprovider_app:c512 ssense_service service_manager find
+allow mediaprovider_app:c768 ssense_service service_manager find
+
+# --- 8. FIX LOGGING ---
+allow ylog ylog_file dir search
+allow ylog ylog_exec file execute_no_trans
+allow ylog system_ext_file file execute_no_trans
+
+allow cplogserver servicemanager binder call
+allow cplogserver hwservicemanager binder call
+allow cplogserver hwservicemanager_prop file open
+allow cplogserver hwservicemanager_prop file read
+allow cplogserver hwservicemanager_prop file getattr
+allow cplogserver hwservicemanager_prop file map
+allow cplogserver default_android_service service_manager find
+allow cplogserver default_android_hwservice hwservice_manager find
+
+allow log_service servicemanager binder call
+allow log_service servicemanager binder transfer
+allow log_service hwservicemanager binder call
+allow log_service hwservicemanager binder transfer
+allow log_service hwservicemanager_prop file open
+allow log_service hwservicemanager_prop file read
+allow log_service hwservicemanager_prop file getattr
+allow log_service hwservicemanager_prop file map
+allow log_service default_android_service service_manager find
+allow log_service hal_log_hwservice hwservice_manager find
+
+allow slogmodem hwservicemanager_prop file open
+allow slogmodem hwservicemanager_prop file read
+allow slogmodem hwservicemanager_prop file getattr
+allow slogmodem hwservicemanager_prop file map
+allow slogmodem servicemanager binder call
+allow slogmodem hwservicemanager binder call
+allow slogmodem slogmodem_config_file dir write
+allow slogmodem slogmodem_config_file dir search
+allow slogmodem proc_cmdline file read
+allow slogmodem proc_cmdline file open
+allow slogmodem proc_cmdline file getattr
+allow slogmodem vendor_radio_prop file read
+allow slogmodem vendor_radio_prop file open
+allow slogmodem vendor_radio_prop file getattr
+allow slogmodem vendor_radio_prop file map
+allow slogmodem ylog_file dir search
+allow slogmodem ylog_file dir read
+allow slogmodem ylog_file dir open
+allow slogmodem slogmodem netlink_kobject_uevent_socket create
+allow slogmodem slogmodem netlink_kobject_uevent_socket bind
+allow slogmodem slogmodem netlink_kobject_uevent_socket read
+allow slogmodem slogmodem netlink_kobject_uevent_socket setopt
+allow slogmodem default_android_service service_manager find
+allow slogmodem default_android_hwservice hwservice_manager find
+
+allow sprd_logmanager_app:c512 game_service service_manager find
+allow sprd_logmanager_app:c768 game_service service_manager find
+allow sprd_logmanager_app:c512 netstats_service service_manager find
+allow sprd_logmanager_app:c768 netstats_service service_manager find
+allow sprd_logmanager_app:c512 content_capture_service service_manager find
+allow sprd_logmanager_app:c768 content_capture_service service_manager find
+
+# --- 9. FIX MEMTRACK ---
+allow hal_memtrack_default proc file open
+allow hal_memtrack_default proc file read
+allow hal_memtrack_default proc file getattr
+
+# --- 10. LINKTURBONATIVE & KEYSTORE ---
+allow linkturbonative linkturbonative_service service_manager add
+allow linkturbonative servicemanager binder call
+allow linkturbonative servicemanager binder transferS
+allow keystore unlabeled dir search
+
+# --- 11. PERMISSION CONTROLLER ---
+allow permissioncontroller_app:c170 default_android_service service_manager find
+allow permissioncontroller_app:c256 default_android_service service_manager find
+allow permissioncontroller_app:c512 default_android_service service_manager find
+allow permissioncontroller_app:c768 default_android_service service_manager find

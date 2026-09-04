@@ -11,7 +11,7 @@ This module addresses issues such as **Ril&Bluetooth crashes**, **excessively lo
 
 ## Links
 
-- Link to P963F64 rom [Mediafire](https://www.mediafire.com/file/f3rql1s7899wu9t/RMX3231_RMX3235_PORTED_FROM_SMART8_64BIT_ANDROID_13.rar/file)
+- Link to P963F64 rom [Mediafire](https://www.mediafire.com/file/8dkbinff5o6ftda/ZTE_A54_FOR_RMX3231_RMX3235.zip/file)
 
 
 ## Note
